@@ -1,0 +1,53 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "base node js project",
+  "main": "./src/index.js",
+  "scripts": {
+    "watch:dev": "NODE_ENV=development nodemon ./src/index.js",
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-server",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist-server",
+    "clean": "rimraf ./dist-server",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "author": "LeonardoBerlatto",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "nodemonConfig": {
+    "exec": "babel-node --presets @babel/preset-env --inspect=9000",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "@types/jest": "^27.4.1"
+  },
+  "private": false
+}
